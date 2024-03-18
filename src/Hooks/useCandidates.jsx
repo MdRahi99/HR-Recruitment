@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const useCandidates = () => {
+
     const { refetch: refetchCandidates, isLoading: candidatesLoading, data: candidates = [] } = useQuery({
         queryKey: ['candidates'],
         queryFn: async () => {
@@ -26,9 +27,19 @@ const useCandidates = () => {
         }
     });
 
+    const candidatesByStatus = async (status) => {
+        try {
+            const res = await axios.get(`https://hr-recruitment-server.vercel.app/candidates/${status}`);
+            return res.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    };
+
     const isLoading = candidatesLoading || shortlistedLoading || rejectedLoading;
 
-    return [candidates, shortlisted, rejected, isLoading, refetchCandidates, refetchShortlisted, refetchRejected];
+    return [candidates, shortlisted, rejected, isLoading, refetchCandidates, refetchShortlisted, refetchRejected, candidatesByStatus];
 };
 
 export default useCandidates;
