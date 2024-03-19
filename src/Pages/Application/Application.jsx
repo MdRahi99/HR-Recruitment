@@ -1,6 +1,8 @@
 import { useState } from "react";
 import useCandidates from "../../Hooks/useCandidates";
 import Loader from "../Shared/Loader/Loader";
+import { IoSearch } from "react-icons/io5";
+import { CiFilter } from "react-icons/ci";
 
 const Application = () => {
 
@@ -17,24 +19,33 @@ const Application = () => {
     }
 
     return (
-        <div className="w-full flex flex-col py-8 px-4 bg-teal-50 h-[100vh]">
+        <div className="w-full flex flex-col p-8 bg-teal-50 h-[100vh]">
             <h1 className="font-semibold text-[18px]">Application</h1>
             <p className="font-medium text-[14px] mt-6">On Going Recruitment</p>
 
-            <div>
-                <div className="flex items-center gap-8 bg-white rounded-lg p-4 font-semibold my-6">
-                    <button className={({ isActive }) => (isActive ? 'flex items-center gap-4 text-white rounded-lg p-2 bg-teal-600' : 'flex items-center gap-4 hover:text-white hover:bg-teal-600 rounded-lg p-2')} onClick={() => handleClick('all')}>All <span>({candidates.length})</span></button>
-                    <button onClick={() => handleClick('shortlisted')}>Shortlisted <span>({shortlisted.length})</span></button>
-                    <button onClick={() => handleClick('process')}>In process <span>(0)</span></button>
-                    <button onClick={() => handleClick('hold')}>On Hold <span>(0)</span></button>
-                    <button onClick={() => handleClick('rejected')}>Rejected <span>({rejected.length})</span></button>
+            <div className="flex items-center justify-between bg-white p-4 my-6 rounded-lg h-20 lg:h-12">
+                <div className="flex items-center gap-2 lg:gap-8 font-semibold">
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('all')}>All <span>({candidates.length})</span></button>
+
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('shortlisted')}>Shortlisted <span>({shortlisted.length})</span></button>
+
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('process')}>In process <span>(0)</span></button>
+
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('hold')}>On Hold <span>(0)</span></button>
+                    
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('rejected')}>Rejected <span>({rejected.length})</span></button>
+                </div>
+
+                <div className="hidden lg:flex items-center gap-4">
+                    <h1 className="flex items-center gap-1"><IoSearch className="text-xl text-teal-600" /> <span className="font-semibold text-[14px]">Search</span></h1>
+                    <h1 className="flex items-center gap-1"><CiFilter className="text-xl text-teal-600" /> <span className="font-semibold text-[14px]">Filter</span></h1>
                 </div>
             </div>
 
             <div className="flex flex-col gap-6">
                 {specificCandidateData?.map(data => {
                     const { _id, name, status } = data;
-                    return <div key={_id} className="flex items-center justify-between bg-white rounded-lg p-3 hover:bg-teal-200">
+                    return <div key={_id} className="flex items-center justify-between bg-white rounded-lg p-3 hover:bg-teal-100">
                         <div>
                             <img src="" alt="" />
                             <div>
