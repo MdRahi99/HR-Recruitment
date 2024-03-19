@@ -1,4 +1,5 @@
 import BarChart from "../../Components/BarChart";
+import PieChart from "../../Components/PieChart";
 
 const Section3 = () => {
     return (
@@ -7,7 +8,7 @@ const Section3 = () => {
                 <BarChart />
             </div>
             <div className="w-full lg:w-1/3 flex justify-center">
-                
+                <PieChart />
             </div>
         </div>
     );

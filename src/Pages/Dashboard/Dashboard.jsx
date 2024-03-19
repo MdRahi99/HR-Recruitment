@@ -2,7 +2,6 @@ import Jobs from "../Jobs/Jobs";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
 import Section3 from "./Section3";
-import Section4 from "./Section4";
 
 const Dashboard = () => {
     return (
@@ -11,7 +10,6 @@ const Dashboard = () => {
                 <Section1 />
                 <Section2 />
                 <Section3 />
-                <Section4 />
             </div>
             <div className=" hidden lg:divider divider-horizontal lg:h-[90vh] bg-teal-200 lg:w-[6px] rounded-lg"></div>
             <div className="w-full lg:w-3/12">
