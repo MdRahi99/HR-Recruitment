@@ -6,17 +6,16 @@ import { CiFilter } from "react-icons/ci";
 
 const Application = () => {
 
-    const [candidates, shortlisted, rejected, isLoading, , , , candidatesByStatus] = useCandidates();
+    const [candidates, shortlisted, rejected, isLoading, , , , candidatesByStatus, hold, process] = useCandidates();
     const [specificCandidateData, setSpecificCandidateData] = useState(candidates);
+    if (isLoading) {
+        return <Loader />
+    }
 
     const handleClick = async (status) => {
         const data = await candidatesByStatus(status);
         setSpecificCandidateData(data);
     };
-
-    if (isLoading) {
-        return <Loader />
-    }
 
     return (
         <div className="w-full flex flex-col p-8 bg-teal-50 h-[100vh]">
@@ -29,9 +28,9 @@ const Application = () => {
 
                     <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('shortlisted')}>Shortlisted <span>({shortlisted.length})</span></button>
 
-                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('process')}>In process <span>(0)</span></button>
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('process')}>In process <span>({process.length})</span></button>
 
-                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('hold')}>On Hold <span>(0)</span></button>
+                    <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('hold')}>On Hold <span>({hold.length})</span></button>
                     
                     <button className="hover:border-b-4 border-teal-600" onClick={() => handleClick('rejected')}>Rejected <span>({rejected.length})</span></button>
                 </div>

@@ -27,6 +27,22 @@ const useCandidates = () => {
         }
     });
 
+    const { refetch: refetchHold, isLoading: holdLoading, data: hold = [] } = useQuery({
+        queryKey: ['hold'],
+        queryFn: async () => {
+            const res = await axios.get('https://hr-recruitment-server.vercel.app/candidates/hold');
+            return res.data;
+        }
+    });
+
+    const { refetch: refetchProcess, isLoading: processLoading, data: process = [] } = useQuery({
+        queryKey: ['process'],
+        queryFn: async () => {
+            const res = await axios.get('https://hr-recruitment-server.vercel.app/candidates/process');
+            return res.data;
+        }
+    });
+
     const candidatesByStatus = async (status) => {
         try {
             const res = await axios.get(`https://hr-recruitment-server.vercel.app/candidates/${status}`);
@@ -37,9 +53,9 @@ const useCandidates = () => {
         }
     };
 
-    const isLoading = candidatesLoading || shortlistedLoading || rejectedLoading;
+    const isLoading = candidatesLoading || shortlistedLoading || rejectedLoading || holdLoading || processLoading;
 
-    return [candidates, shortlisted, rejected, isLoading, refetchCandidates, refetchShortlisted, refetchRejected, candidatesByStatus];
+    return [candidates, shortlisted, rejected, isLoading, refetchCandidates, refetchShortlisted, refetchRejected, candidatesByStatus, hold, process, refetchHold, refetchProcess];
 };
 
 export default useCandidates;
